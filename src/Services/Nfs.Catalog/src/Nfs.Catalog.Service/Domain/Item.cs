@@ -1,3 +1,11 @@
+/*--****************************************************************************
+  --* Project Name    : WebApi-MongoDB-CRUD
+  --* Reference       : System, Nfs.Common
+  --* Description     : Item domain entity
+  --* Configuration Record
+  --* Review            Ver  Author           Date      Cr       Comments
+  --* 001               001  A HATKAR         15/11/23  CR-XXXXX Original
+  --****************************************************************************/
 using System;
 using Nfs.Common;
 

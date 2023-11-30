@@ -1,3 +1,11 @@
+/*--****************************************************************************
+  --* Project Name    : WebApi-MongoDB-CRUD
+  --* Reference       : Startup references
+  --* Description     : Startup class
+  --* Configuration Record
+  --* Review            Ver  Author           Date      Cr       Comments
+  --* 001               001  A HATKAR         15/11/23  CR-XXXXX Original
+  --****************************************************************************/
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
