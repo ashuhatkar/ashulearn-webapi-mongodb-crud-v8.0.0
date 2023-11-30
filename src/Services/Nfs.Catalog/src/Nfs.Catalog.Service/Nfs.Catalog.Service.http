@@ -1,0 +1,6 @@
+@Nfs.Catalog.Service_HostAddress = http://localhost:5286
+
+GET {{Nfs.Catalog.Service_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
