@@ -1,3 +1,11 @@
+/*--****************************************************************************
+  --* Project Name    : WebApi-MongoDB-CRUD
+  --* Reference       : Microsoft.AspNetCore.Mvc ...
+  --* Description     : Items controller
+  --* Configuration Record
+  --* Review            Ver  Author           Date      Cr       Comments
+  --* 001               001  A HATKAR         15/11/23  CR-XXXXX Original
+  --****************************************************************************/
 using Microsoft.AspNetCore.Mvc;
 using Nfs.Catalog.Service.Domain;
 using Nfs.Catalog.Service.Models;
