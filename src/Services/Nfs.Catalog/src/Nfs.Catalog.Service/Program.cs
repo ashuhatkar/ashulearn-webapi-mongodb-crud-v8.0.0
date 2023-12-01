@@ -14,7 +14,6 @@ using Microsoft.Extensions.Hosting;
 using Nfs.Catalog.Service.Domain;
 using Nfs.Common.MongoDB;
 using Nfs.Common.Settings;
-using Nfs.Common.MassTransit;
 using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -34,8 +33,7 @@ else
     });
 
 builder.Services.AddMongo()
-    .AddMongoRepository<Item>("items")
-    .AddMassTransitWithRabbitMq();
+    .AddMongoRepository<Item>("items");
 
 builder.Services.AddControllers(options =>
 {
