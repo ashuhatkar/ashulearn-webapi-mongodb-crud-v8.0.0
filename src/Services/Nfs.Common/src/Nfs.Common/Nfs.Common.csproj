@@ -8,7 +8,7 @@
     <Version>4.5.0.0</Version>
     <Description>The Nfs.Common project contains a set of core classes for nfsSolution, such as caching, events, helpers, and business objects (for example, Order and Customer entities).</Description>
     <PackageProjectUrl>https://www.ashuhatkar.com/</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/ashuhatkar</RepositoryUrl>
+    <RepositoryUrl>https://github.com/ashuhatkar/ashulearn-webapi-mongodb-crud-v8.0.0</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
