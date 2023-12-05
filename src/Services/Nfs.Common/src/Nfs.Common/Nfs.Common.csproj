@@ -3,14 +3,15 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <Copyright>Copyright © ashuhatkar, Ltd</Copyright>
-    <Company>ashuhatkar, Ltd</Company>
-    <Authors>ashuhatkar, Ltd</Authors>
+    <Company>Nfs.Common</Company>
+    <Authors>Nfs.Common</Authors>
     <Version>4.5.0.0</Version>
     <Description>The Nfs.Common project contains a set of core classes for nfsSolution, such as caching, events, helpers, and business objects (for example, Order and Customer entities).</Description>
-    <PackageProjectUrl>https://www.ashuhatkar.com/</PackageProjectUrl>
+    <PackageProjectUrl>https://nuget.pkg.github.com/ashuhatkar/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/ashuhatkar/ashulearn-webapi-mongodb-crud-v8.0.0</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <ImplicitUsings>enable</ImplicitUsings>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
