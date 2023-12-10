@@ -1,4 +1,4 @@
-/*--****************************************************************************
+﻿/*--****************************************************************************
   --* Project Name    : WebApi-MongoDB-CRUD
   --* Reference       : Startup references
   --* Description     : Startup class
@@ -14,7 +14,6 @@ using Microsoft.Extensions.Hosting;
 using Nfs.Catalog.Service.Domain;
 using Nfs.Common.MongoDB;
 using Nfs.Common.Settings;
-using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -53,9 +52,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
-
 await app.RunAsync();

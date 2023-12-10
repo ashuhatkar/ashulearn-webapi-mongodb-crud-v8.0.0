@@ -1,4 +1,4 @@
-/*--****************************************************************************
+﻿/*--****************************************************************************
   --* Project Name    : WebApi-MongoDB-CRUD
   --* Reference       : Microsoft.AspNetCore.Mvc ...
   --* Description     : Items controller
@@ -6,15 +6,15 @@
   --* Review            Ver  Author           Date      Cr       Comments
   --* 001               001  A HATKAR         15/11/23  CR-XXXXX Original
   --****************************************************************************/
-using Microsoft.AspNetCore.Mvc;
-using Nfs.Catalog.Service.Domain;
-using Nfs.Catalog.Service.Models;
-using Nfs.Catalog.Service.Infrastructure.Mapper.Extensions;
-using Nfs.Common;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
+using Nfs.Catalog.Service.Domain;
+using Nfs.Catalog.Service.Infrastructure.Mapper.Extensions;
+using Nfs.Catalog.Service.Models;
+using Nfs.Common;
 
 namespace Nfs.Catalog.Service.Controllers
 {
@@ -44,10 +44,8 @@ namespace Nfs.Catalog.Service.Controllers
         /// <summary>
         /// Gets list of catalog items
         /// </summary>
-        /// <returns>
-        /// A task that represents the asynchronous operation
-        /// The task result contains the catalog list model
-        /// </returns>
+        /// <returns>Catalog list model</returns>
+        /// GET api/v1/Items
         [HttpGet]
         public virtual async Task<ActionResult<IEnumerable<ItemDto>>> GetAsync()
         {
@@ -61,11 +59,8 @@ namespace Nfs.Catalog.Service.Controllers
         /// Gets a catalog item
         /// </summary>
         /// <param name="id">Catalog identifier</param>
-        /// <returns>
-        /// A task that represents the asynchronous operation
-        /// The task result contains a catalog item
-        /// </returns>
-        //GET: /items/{id}
+        /// <returns>Catalog item</returns>
+        /// GET api/v1/Items/{id}
         [HttpGet]
         [Route("{id:Guid}")]
         public virtual async Task<IActionResult> GetByIdAsync([FromRoute] Guid id)
@@ -82,10 +77,7 @@ namespace Nfs.Catalog.Service.Controllers
         /// Inserts a catalog item
         /// </summary>
         /// <param name="createItemDto">Create item dto model</param>
-        /// <returns>
-        /// A task that represents the asynchronous operation
-        /// The task result contains a catalog item
-        /// </returns>
+        /// <returns>Catalog item</returns>
         //POST /items
         [HttpPost]
         public virtual async Task<IActionResult> PostAsync([FromBody] CreateItemDto createItemDto)
@@ -108,10 +100,7 @@ namespace Nfs.Catalog.Service.Controllers
         /// </summary>
         /// <param name="id">Catalog item identifier</param>
         /// <param name="updateItemDto">Update item dto model</param>
-        /// <returns>
-        /// A task that represents the asynchronous operation
-        /// The task result contains the catalog item
-        /// </returns>
+        /// <returns>Catalog item</returns>
         //PUT /items/{id}
         [HttpPut]
         [Route("{id:Guid}")]
@@ -135,9 +124,7 @@ namespace Nfs.Catalog.Service.Controllers
         /// Deletes a catalog item
         /// </summary>
         /// <param name="id">Catalog identifier</param>
-        /// <returns>
-        /// A task that represents the asynchronous operation
-        /// </returns>
+        /// <returns>Task</returns>
         //DELETE /items/{id}
         [HttpDelete]
         [Route("{id:Guid}")]
