@@ -27,10 +27,7 @@ namespace Nfs.Common
         /// </summary>
         /// <param name="func">Function to select entries</param>
         /// <param name="includeDeleted">Whether to incldue deleted items (applies only to <see cref=""/> entities)</param>
-        /// <returns>
-        /// A task that represents the asynchronous operation
-        /// The task result contains the entity entries
-        /// </returns>
+        /// <returns>Entity entries</returns>
         Task<IReadOnlyCollection<TEntity>> GetAllAsync(Func<IQueryable<TEntity>, IQueryable<TEntity>> func = null,
             bool includeDeleted = true);
 
@@ -50,10 +47,7 @@ namespace Nfs.Common
         /// </summary>
         /// <param name="id">Entity entry identifier</param>
         /// <param name="includeDeleted">Whether to incldue deleted items (applies only to <see cref=""/> entities)</param>
-        /// <returns>
-        /// A task that represents the asynchronous operation
-        /// the task result contains the entity entry
-        /// </returns>
+        /// <returns>Entity entry</returns>
         Task<TEntity> GetByIdAsync(Guid? id, bool includeDeleted = true);
 
         Task<TEntity> GetByIdAsync(Expression<Func<TEntity, bool>> filter);
@@ -71,7 +65,7 @@ namespace Nfs.Common
         /// </summary>
         /// <param name="entity">Entity entry</param>
         /// <param name="publishEvent">Whether to publish event notification</param>
-        /// <returns>A task that represents the asynchronous operation</returns>
+        /// <returns>A async task</returns>
         Task InsertAsync(TEntity entity, bool publishEvent = true);
 
         /// <summary>
@@ -86,7 +80,7 @@ namespace Nfs.Common
         /// </summary>
         /// <param name="entities">Entity entries</param>
         /// <param name="publishEvent">Whether to publish event notification</param>
-        /// <returns>A task that represents the asynchronous operation</returns>
+        /// <returns>A async task</returns>
         Task InsertAsync(IReadOnlyCollection<TEntity> entities, bool publishEvent = true);
 
         /// <summary>
@@ -101,7 +95,7 @@ namespace Nfs.Common
         /// </summary>
         /// <param name="entity">Entity entry</param>
         /// <param name="publishEvent">Whether to publish veent notification</param>
-        /// <returns>A task that represents the asynchronous operation</returns>
+        /// <returns>A async task</returns>
         Task UpdateAsync(TEntity entity, bool publishEvent = true);
 
         /// <summary>
@@ -116,7 +110,7 @@ namespace Nfs.Common
         /// </summary>
         /// <param name="entities">Entity entries</param>
         /// <param name="publishEvent">Whether to publish event notification</param>
-        /// <returns>A task that represents the asynchronous operation</returns>
+        /// <returns>A async task</returns>
         Task UpdateAsync(IReadOnlyCollection<TEntity> entities, bool publishEvent = true);
 
         /// <summary>
@@ -131,7 +125,7 @@ namespace Nfs.Common
         /// </summary>
         /// <param name="id">Identifier</param>
         /// <param name="publishEvent">Whether to publish event notification</param>
-        /// <returns>A task that represents the asynchronous operation</returns>
+        /// <returns>A async task</returns>
         Task DeleteAsync(Guid id, bool publishEvent = true);
 
         /// <summary>
@@ -139,7 +133,7 @@ namespace Nfs.Common
         /// </summary>
         /// <param name="entity">Entity entry</param>
         /// <param name="publishEvent">Whether to publish event notification</param>
-        /// <returns>A task that represents the asynchronous operation</returns>
+        /// <returns>A async task</returns>
         Task DeleteAsync(TEntity entity, bool publishEvent = true);
 
         /// <summary>
@@ -147,7 +141,7 @@ namespace Nfs.Common
         /// </summary>
         /// <param name="entities">Entity entries</param>
         /// <param name="publishEvent">Whether to publish event notification</param>
-        /// <returns>A task that represents the asynchronous operation</returns>
+        /// <returns>A async task</returns>
         Task DeleteAsync(IList<TEntity> entities, bool publishEvent = true);
 
         Task<DeleteResult> DeleteAsync(Expression<Func<TEntity, bool>> predicate);
