@@ -22,4 +22,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Nfs.Catalog.Service\Nfs.Catalog.Service.csproj" />
+  </ItemGroup>
+
 </Project>
