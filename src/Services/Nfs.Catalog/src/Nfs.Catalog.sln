@@ -7,6 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nfs.Catalog.Contracts", "Nf
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nfs.Catalog.Service", "Nfs.Catalog.Service\Nfs.Catalog.Service.csproj", "{B4C5625D-2776-4A04-BF26-737AD849C609}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D098F679-1B99-4E4F-A1FA-E20670D39513}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog.FunctionalTests", "Tests\Catalog.FunctionalTests\Catalog.FunctionalTests.csproj", "{42E10E11-870A-4EDE-B7EA-D2675C047072}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog.UnitTests", "Tests\Catalog.UnitTests\Catalog.UnitTests.csproj", "{20494F6D-6081-432D-932B-77824734D838}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +30,17 @@ Global
 		{B4C5625D-2776-4A04-BF26-737AD849C609}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4C5625D-2776-4A04-BF26-737AD849C609}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4C5625D-2776-4A04-BF26-737AD849C609}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42E10E11-870A-4EDE-B7EA-D2675C047072}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42E10E11-870A-4EDE-B7EA-D2675C047072}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42E10E11-870A-4EDE-B7EA-D2675C047072}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42E10E11-870A-4EDE-B7EA-D2675C047072}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20494F6D-6081-432D-932B-77824734D838}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20494F6D-6081-432D-932B-77824734D838}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20494F6D-6081-432D-932B-77824734D838}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20494F6D-6081-432D-932B-77824734D838}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{42E10E11-870A-4EDE-B7EA-D2675C047072} = {D098F679-1B99-4E4F-A1FA-E20670D39513}
+		{20494F6D-6081-432D-932B-77824734D838} = {D098F679-1B99-4E4F-A1FA-E20670D39513}
 	EndGlobalSection
 EndGlobal
