@@ -4,10 +4,12 @@
   --* Description     : Startup class
   --* Configuration Record
   --* Review            Ver  Author           Date      Cr       Comments
-  --* 001               001  A HATKAR         15/11/23  CR-XXXXX Original
+  --* 001               001  A HATKAR         15/12/23  CR-XXXXX Original
   --****************************************************************************/
+using System.Threading.Tasks;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -15,43 +17,65 @@ using Nfs.Catalog.Service.Domain;
 using Nfs.Common.MongoDB;
 using Nfs.Common.Settings;
 
-var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-ServiceSettings _serviceSettings;
-_serviceSettings = builder.Configuration.GetSection(nameof(ServiceSettings)).Get<ServiceSettings>();
-
-var useAutofac = true;
-if (useAutofac)
-    builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
-else
-    builder.Host.UseDefaultServiceProvider(options =>
+namespace Nfs.Catalog.Service
+{
+    public class Program
     {
-        options.ValidateOnBuild = true;
-        options.ValidateScopes = false;
-    });
+        public static async Task Main(string[] args)
+        {
+            var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddMongo()
-    .AddMongoRepository<Item>("items");
+            var useAutofac = true;
+            if (useAutofac)
+                builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+            else
+                builder.Host.UseDefaultServiceProvider(options =>
+                {
+                    options.ValidateOnBuild = true;
+                    options.ValidateScopes = false;
+                });
 
-builder.Services.AddControllers(options =>
-{
-    options.SuppressAsyncSuffixInActionNames = false;
-});
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+            builder.Services.AddMongo()
+                .AddMongoRepository<Item>("items");
 
-var app = builder.Build();
+            builder.Services.AddControllers(options =>
+            {
+                options.SuppressAsyncSuffixInActionNames = false;
+            });
+            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
+            var app = builder.Build();
+
+            // Configure the HTTP request pipeline.
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseSwagger();
+                app.UseSwaggerUI();
+            }
+
+            app.UseHttpsRedirection();
+            app.UseAuthorization();
+            app.MapControllers();
+            await app.RunAsync();
+        }
+
+        /// <summary>
+        /// Add and configure any of the middleware
+        /// </summary>
+        /// <param name="services">Collection of service descriptors</param>
+        /// <param name="configuration">Configuration of the application</param>
+        public void ConfigureService(IServiceCollection services, IConfiguration configuration)
+        {
+        }
+
+        /// <summary>
+        /// Configure the using of added middleware
+        /// </summary>
+        /// <param name="application">Builder for configuring an application's request pipeline</param>
+        public void Configure(IApplicationBuilder application, IWebHostEnvironment env)
+        {
+        }
+    }
 }
-
-app.UseHttpsRedirection();
-app.UseAuthorization();
-app.MapControllers();
-await app.RunAsync();
