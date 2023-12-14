@@ -14,29 +14,46 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.TestHost;
+using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Catalog.FunctionalTests
 {
     public class CatalogItemScenariosBase
     {
-        public TestServer CreateServer()
+        public WebApplicationFactory<Program> CreateServer()
         {
             var path = Assembly.GetAssembly(typeof(CatalogItemScenariosBase)).Location;
 
-            var hostBuilder = new WebHostBuilder()
-                .UseContentRoot(Path.GetDirectoryName(path))
-                .ConfigureAppConfiguration(cb =>
+            //var hostBuilder = new WebHostBuilder()
+            //    .UseContentRoot(Path.GetDirectoryName(path))
+            //    .ConfigureAppConfiguration(cb =>
+            //    {
+            //        cb.AddJsonFile("appsettings.json", optional: false)
+            //        .AddEnvironmentVariables();
+            //    })
+            //    .UseStartup<Program>();
+
+            //var testServer = new TestServer(hostBuilder);
+
+            //return testServer;
+
+            var application = new WebApplicationFactory<Program>()
+                .WithWebHostBuilder(builder =>
                 {
-                    cb.AddJsonFile("appsettings.json", optional: false)
-                    .AddEnvironmentVariables();
-                })
-                .UseStartup<Program>();
+                    builder.UseContentRoot(Directory.GetCurrentDirectory());
+                    builder.ConfigureAppConfiguration(app =>
+                    {
+                        app.AddJsonFile("appsettings.json", optional: false)
+                        .AddEnvironmentVariables();
+                    });
+                    builder.ConfigureServices(services =>
+                    {
+                    });
+                });
 
-            var testServer = new TestServer(hostBuilder);
-
-            return testServer;
+            return application;
         }
 
         public static class Get

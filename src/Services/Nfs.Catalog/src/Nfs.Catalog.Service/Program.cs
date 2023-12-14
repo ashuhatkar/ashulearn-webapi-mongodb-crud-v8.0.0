@@ -19,7 +19,7 @@ using Nfs.Common.Settings;
 
 namespace Nfs.Catalog.Service
 {
-    public class Program
+    public partial class Program
     {
         public static async Task Main(string[] args)
         {
@@ -59,23 +59,6 @@ namespace Nfs.Catalog.Service
             app.UseAuthorization();
             app.MapControllers();
             await app.RunAsync();
-        }
-
-        /// <summary>
-        /// Add and configure any of the middleware
-        /// </summary>
-        /// <param name="services">Collection of service descriptors</param>
-        /// <param name="configuration">Configuration of the application</param>
-        public void ConfigureService(IServiceCollection services, IConfiguration configuration)
-        {
-        }
-
-        /// <summary>
-        /// Configure the using of added middleware
-        /// </summary>
-        /// <param name="application">Builder for configuring an application's request pipeline</param>
-        public void Configure(IApplicationBuilder application, IWebHostEnvironment env)
-        {
         }
     }
 }

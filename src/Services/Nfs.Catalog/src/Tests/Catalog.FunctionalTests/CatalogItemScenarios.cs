@@ -17,7 +17,8 @@ namespace Catalog.FunctionalTests
         public async Task Get_get_all_catalogitems_and_response_ok_status_code()
         {
             using var server = CreateServer();
-            var response = await server.CreateClient().GetAsync(Get.Items());
+            var client = server.CreateClient();
+            var response = await client.GetAsync(Get.Items());
 
             response.EnsureSuccessStatusCode();
         }
@@ -47,7 +48,7 @@ namespace Catalog.FunctionalTests
         {
             // Arrange
             using var server = CreateServer();
-            var response = await server.CreateClient().GetAsync(Get.ItemById(Guid.NewGuid()));
+            var response = await server.CreateClient().GetAsync(Get.ItemById(Guid.Empty));
 
             // Assert
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
