@@ -90,7 +90,7 @@ namespace Nfs.Catalog.Service.Controllers
                 CreatedDate = DateTimeOffset.UtcNow,
             };
 
-            await _itemsRepository.CreateAsync(item);
+            await _itemsRepository.InsertAsync(item);
 
             return CreatedAtAction(nameof(GetByIdAsync), new { id = item.Id }, item);
         }

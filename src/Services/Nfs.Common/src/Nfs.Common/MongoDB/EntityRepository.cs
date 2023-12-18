@@ -55,7 +55,7 @@ namespace Nfs.Common.MongoDB
         public IReadOnlyCollection<TEntity> GetAll(Func<IQueryable<TEntity>, IQueryable<TEntity>> func = null,
             bool includeDeleted = true)
         {
-            return null;
+            return _dbCollection.Find(filterDefinitionBuilder.Empty).ToList();
         }
 
         /// <summary>
