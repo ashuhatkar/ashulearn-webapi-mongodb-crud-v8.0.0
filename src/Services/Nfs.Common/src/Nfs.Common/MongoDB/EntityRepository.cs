@@ -1,4 +1,4 @@
-/*--****************************************************************************
+﻿/*--****************************************************************************
   --* Project Name    : WebApi-MongoDB-CRUD
   --* Reference       : System
   --*                   System.Collection.Generic ...
@@ -26,7 +26,7 @@ namespace Nfs.Common.MongoDB
         #region Fields
 
         private readonly IMongoCollection<TEntity> _dbCollection;
-        private readonly FilterDefinitionBuilder<TEntity> filterDefinitionBuilder = Builders<TEntity>.Filter;
+        private readonly FilterDefinitionBuilder<TEntity> _filterDefinitionBuilder = Builders<TEntity>.Filter;
 
         #endregion
 
@@ -44,7 +44,7 @@ namespace Nfs.Common.MongoDB
         public virtual async Task<IReadOnlyCollection<TEntity>> GetAllAsync(Func<IQueryable<TEntity>, IQueryable<TEntity>> func = null,
             bool includeDeleted = true)
         {
-            return await _dbCollection.Find(filterDefinitionBuilder.Empty).ToListAsync();
+            return await _dbCollection.Find(_filterDefinitionBuilder.Empty).ToListAsync();
         }
 
         public virtual async Task<IReadOnlyCollection<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> filter)
@@ -55,7 +55,7 @@ namespace Nfs.Common.MongoDB
         public IReadOnlyCollection<TEntity> GetAll(Func<IQueryable<TEntity>, IQueryable<TEntity>> func = null,
             bool includeDeleted = true)
         {
-            return _dbCollection.Find(filterDefinitionBuilder.Empty).ToList();
+            return _dbCollection.Find(_filterDefinitionBuilder.Empty).ToList();
         }
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace Nfs.Common.MongoDB
             if (!id.HasValue)
                 return null;
 
-            FilterDefinition<TEntity> filter = filterDefinitionBuilder.Eq(entity => entity.Id, id);
+            FilterDefinition<TEntity> filter = _filterDefinitionBuilder.Eq(entity => entity.Id, id);
             return await _dbCollection.Find(filter).FirstOrDefaultAsync();
         }
 
@@ -87,7 +87,6 @@ namespace Nfs.Common.MongoDB
         /// <param name="ids">Entity entry identifier</param>
         /// <param name="includeDeleted">Whether to include deleted items (applies only to <see cref=""/> entities)</param>
         /// <returns>
-        /// A task that represents the asynchronous operation
         /// The task result contains the entity entries
         /// </returns>
         public virtual async Task<IReadOnlyCollection<TEntity>> GetByIdsAsync(IList<int> ids,
@@ -182,7 +181,7 @@ namespace Nfs.Common.MongoDB
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
 
-            FilterDefinition<TEntity> filter = filterDefinitionBuilder.Eq(existingEntity => existingEntity.Id, entity.Id);
+            FilterDefinition<TEntity> filter = _filterDefinitionBuilder.Eq(existingEntity => existingEntity.Id, entity.Id);
             await _dbCollection.ReplaceOneAsync(filter, entity);
 
             //event notification
@@ -259,7 +258,7 @@ namespace Nfs.Common.MongoDB
         /// <param name="publishEvent">Whether to publish event notification</param>
         public virtual async Task DeleteAsync(Guid id, bool publishEvent = true)
         {
-            FilterDefinition<TEntity> filter = filterDefinitionBuilder.Eq(entity => entity.Id, id);
+            FilterDefinition<TEntity> filter = _filterDefinitionBuilder.Eq(entity => entity.Id, id);
             await _dbCollection.DeleteOneAsync(filter);
         }
 
@@ -299,7 +298,7 @@ namespace Nfs.Common.MongoDB
 
             foreach (var entity in entities)
             {
-                FilterDefinition<TEntity> filter = filterDefinitionBuilder.Eq(existingEntity => existingEntity.Id, entity.Id);
+                FilterDefinition<TEntity> filter = _filterDefinitionBuilder.Eq(existingEntity => existingEntity.Id, entity.Id);
                 await _dbCollection.DeleteOneAsync(filter);
             }
         }
@@ -309,7 +308,6 @@ namespace Nfs.Common.MongoDB
         /// </summary>
         /// <param name="predicate">A function to test each element for a condition</param>
         /// <returns>
-        /// A task that represents the asynchronous operation
         /// The task result contains the number of deleted records
         /// </returns>
         public virtual async Task<DeleteResult> DeleteAsync(Expression<Func<TEntity, bool>> predicate)
