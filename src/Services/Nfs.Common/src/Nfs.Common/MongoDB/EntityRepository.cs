@@ -63,10 +63,7 @@ namespace Nfs.Common.MongoDB
         /// </summary>
         /// <param name="id">Entity entry identifier</param>
         /// <param name="includeDeleted">Whether to include deleted items (applies only to <see cref="" /> entities)</param>
-        /// <returns>
-        /// A task that represents the asychronous operation
-        /// The task result contains the entity entry
-        /// </returns>
+        /// <returns>The task result contains the entity entry</returns>
         public virtual async Task<TEntity> GetByIdAsync(Guid? id, bool includeDeleted = true)
         {
             if (!id.HasValue)
@@ -86,9 +83,7 @@ namespace Nfs.Common.MongoDB
         /// </summary>
         /// <param name="ids">Entity entry identifier</param>
         /// <param name="includeDeleted">Whether to include deleted items (applies only to <see cref=""/> entities)</param>
-        /// <returns>
-        /// The task result contains the entity entries
-        /// </returns>
+        /// <returns>The task result contains the entity entries</returns>
         public virtual async Task<IReadOnlyCollection<TEntity>> GetByIdsAsync(IList<int> ids,
             bool includeDeleted = true)
         {
@@ -122,8 +117,7 @@ namespace Nfs.Common.MongoDB
         /// <param name="publishEvent">Whether to publish event notification</param>
         public virtual void Insert(TEntity entity, bool publishEvent = true)
         {
-            if (entity == null)
-                throw new ArgumentNullException(nameof(entity));
+            ArgumentNullException.ThrowIfNull(entity);
 
             //_dbCollection.Insert(entity);
 
@@ -139,8 +133,7 @@ namespace Nfs.Common.MongoDB
         /// <returns>A task that represents the asynchronous operation</returns>
         public virtual async Task InsertAsync(IReadOnlyCollection<TEntity> entities, bool publishEvent = true)
         {
-            if (entities == null)
-                throw new ArgumentNullException(nameof(entities));
+            ArgumentNullException.ThrowIfNull(entities);
 
             if (!publishEvent)
                 return;
@@ -158,8 +151,7 @@ namespace Nfs.Common.MongoDB
         /// <param name="publishEvent">Whether to publish event notification</param>
         public virtual void Insert(IReadOnlyCollection<TEntity> entities, bool publishEvent = true)
         {
-            if (entities == null)
-                throw new ArgumentNullException(nameof(entities));
+            ArgumentNullException.ThrowIfNull(entities);
 
             if (!publishEvent)
                 return;
@@ -178,8 +170,7 @@ namespace Nfs.Common.MongoDB
         /// <returns>A task that represents the asynchronous operation</returns>
         public virtual async Task UpdateAsync(TEntity entity, bool publishEvent = true)
         {
-            if (entity == null)
-                throw new ArgumentNullException(nameof(entity));
+            ArgumentNullException.ThrowIfNull(entity);
 
             FilterDefinition<TEntity> filter = _filterDefinitionBuilder.Eq(existingEntity => existingEntity.Id, entity.Id);
             await _dbCollection.ReplaceOneAsync(filter, entity);
@@ -195,8 +186,7 @@ namespace Nfs.Common.MongoDB
         /// <param name="publishEvent">Whether to publish event notification</param>
         public virtual void Update(TEntity entity, bool publishEvent = true)
         {
-            if (entity == null)
-                throw new ArgumentNullException(nameof(entity));
+            ArgumentNullException.ThrowIfNull(entity);
 
             //event notification
             //if (publishEvent) //logic
@@ -210,8 +200,7 @@ namespace Nfs.Common.MongoDB
         /// <returns>A task that represents the asynchronous operation</returns>
         public virtual async Task UpdateAsync(IReadOnlyCollection<TEntity> entities, bool publishEvent = true)
         {
-            if (entities == null)
-                throw new ArgumentNullException(nameof(entities));
+            ArgumentNullException.ThrowIfNull(entities);
 
             if (entities.Count == 0)
                 return;
@@ -234,8 +223,7 @@ namespace Nfs.Common.MongoDB
         /// <param name="publishEvent">Whether to publish event notification</param>
         public virtual void Update(IReadOnlyCollection<TEntity> entities, bool publishEvent = true)
         {
-            if (entities == null)
-                throw new ArgumentNullException(nameof(entities));
+            ArgumentNullException.ThrowIfNull(entities);
 
             if (entities.Count == 0)
                 return;
@@ -290,11 +278,9 @@ namespace Nfs.Common.MongoDB
         /// <param name="entities">Entity entries</param>
         /// <param name="publishEvent">Whether to publish event notification</param>
         /// <returns>A task that represents the asycnhr</returns>
-        /// <exception cref="ArgumentNullException"></exception>
         public virtual async Task DeleteAsync(IList<TEntity> entities, bool publishEvent = true)
         {
-            if (entities == null)
-                throw new ArgumentNullException(nameof(entities));
+            ArgumentNullException.ThrowIfNull(entities);
 
             foreach (var entity in entities)
             {
@@ -307,13 +293,10 @@ namespace Nfs.Common.MongoDB
         /// Delete entity entries by the passed predicate
         /// </summary>
         /// <param name="predicate">A function to test each element for a condition</param>
-        /// <returns>
-        /// The task result contains the number of deleted records
-        /// </returns>
+        /// <returns>The task result contains the number of deleted records</returns>
         public virtual async Task<DeleteResult> DeleteAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            if (predicate == null)
-                throw new ArgumentNullException(nameof(predicate));
+            ArgumentNullException.ThrowIfNull(predicate);
 
             using var transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
             var countDeletedRecords = await _dbCollection.DeleteManyAsync(predicate);
@@ -331,8 +314,7 @@ namespace Nfs.Common.MongoDB
         /// </returns>
         public virtual DeleteResult Delete(Expression<Func<TEntity, bool>> predicate)
         {
-            if (predicate == null)
-                throw new ArgumentNullException(nameof(predicate));
+            ArgumentNullException.ThrowIfNull(predicate);
 
             using var transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
             var countDeletedRecords = _dbCollection.DeleteMany(predicate);
