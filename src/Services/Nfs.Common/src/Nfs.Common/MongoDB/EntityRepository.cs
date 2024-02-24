@@ -41,17 +41,34 @@ namespace Nfs.Common.MongoDB
 
         #region Methods
 
+        /// <summary>
+        /// Get all entity entries
+        /// </summary>
+        /// <param name="func">Function to select entries</param>
+        /// <param name="includeDeleted">Whether to include deleted items (applies only to <see cref="ISoftDeletedEntity"/> entities)</param>
+        /// <returns>The task result contains the entity entries</returns>
         public virtual async Task<IReadOnlyCollection<TEntity>> GetAllAsync(Func<IQueryable<TEntity>, IQueryable<TEntity>> func = null,
             bool includeDeleted = true)
         {
             return await _dbCollection.Find(_filterDefinitionBuilder.Empty).ToListAsync();
         }
 
+        /// <summary>
+        /// Get all entity entries
+        /// </summary>
+        /// <param name="filter">A function to test each element for a condition</param>
+        /// <returns>The task result contains the number of deleted records</returns>
         public virtual async Task<IReadOnlyCollection<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> filter)
         {
             return await _dbCollection.Find(filter).ToListAsync();
         }
 
+        /// <summary>
+        /// Get all entity entries
+        /// </summary>
+        /// <param name="func">Function to select entries</param>
+        /// <param name="includeDeleted">Whether to include deleted items (applies only to <see cref="ISoftDeletedEntity"/> entities)</param>
+        /// <returns>Entity entries</returns>
         public IReadOnlyCollection<TEntity> GetAll(Func<IQueryable<TEntity>, IQueryable<TEntity>> func = null,
             bool includeDeleted = true)
         {
@@ -62,7 +79,7 @@ namespace Nfs.Common.MongoDB
         /// Get the entity entry
         /// </summary>
         /// <param name="id">Entity entry identifier</param>
-        /// <param name="includeDeleted">Whether to include deleted items (applies only to <see cref="" /> entities)</param>
+        /// <param name="includeDeleted">Whether to include deleted items (applies only to <see cref="ISoftDeletedEntity" /> entities)</param>
         /// <returns>The task result contains the entity entry</returns>
         public virtual async Task<TEntity> GetByIdAsync(Guid? id, bool includeDeleted = true)
         {
@@ -73,6 +90,11 @@ namespace Nfs.Common.MongoDB
             return await _dbCollection.Find(filter).FirstOrDefaultAsync();
         }
 
+        /// <summary>
+        /// Get entity entry
+        /// </summary>
+        /// <param name="filter">A function to test each element for a condition</param>
+        /// <returns>The entity entry</returns>
         public virtual async Task<TEntity> GetByIdAsync(Expression<Func<TEntity, bool>> filter)
         {
             return await _dbCollection.Find(filter).FirstOrDefaultAsync();
@@ -82,7 +104,7 @@ namespace Nfs.Common.MongoDB
         /// Get entity entries by identifiers
         /// </summary>
         /// <param name="ids">Entity entry identifier</param>
-        /// <param name="includeDeleted">Whether to include deleted items (applies only to <see cref=""/> entities)</param>
+        /// <param name="includeDeleted">Whether to include deleted items (applies only to <see cref="ISoftDeletedEntity"/> entities)</param>
         /// <returns>The task result contains the entity entries</returns>
         public virtual async Task<IReadOnlyCollection<TEntity>> GetByIdsAsync(IList<int> ids,
             bool includeDeleted = true)
@@ -277,7 +299,7 @@ namespace Nfs.Common.MongoDB
         /// </summary>
         /// <param name="entities">Entity entries</param>
         /// <param name="publishEvent">Whether to publish event notification</param>
-        /// <returns>A task that represents the asycnhr</returns>
+        /// <returns>A task that represents the asynchronous operation</returns>
         public virtual async Task DeleteAsync(IList<TEntity> entities, bool publishEvent = true)
         {
             ArgumentNullException.ThrowIfNull(entities);

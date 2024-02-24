@@ -1,4 +1,4 @@
-/*--****************************************************************************
+﻿/*--****************************************************************************
   --* Project Name    : WebApi-MongoDB-CRUD
   --* Reference       : System
   --*                   System.Collection.Generic ...
@@ -31,6 +31,11 @@ namespace Nfs.Common
         Task<IReadOnlyCollection<TEntity>> GetAllAsync(Func<IQueryable<TEntity>, IQueryable<TEntity>> func = null,
             bool includeDeleted = true);
 
+        /// <summary>
+        /// Get all entity entries
+        /// </summary>
+        /// <param name="filter">A function to test each element for a condition</param>
+        /// <returns>The task result contains the number of deleted records</returns>
         Task<IReadOnlyCollection<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> filter);
 
         /// <summary>
@@ -50,6 +55,11 @@ namespace Nfs.Common
         /// <returns>Entity entry</returns>
         Task<TEntity> GetByIdAsync(Guid? id, bool includeDeleted = true);
 
+        /// <summary>
+        /// Get entity entry
+        /// </summary>
+        /// <param name="filter">A function to test each element for a condition</param>
+        /// <returns>The entity entry</returns>
         Task<TEntity> GetByIdAsync(Expression<Func<TEntity, bool>> filter);
 
         /// <summary>
@@ -144,8 +154,20 @@ namespace Nfs.Common
         /// <returns>A async task</returns>
         Task DeleteAsync(IList<TEntity> entities, bool publishEvent = true);
 
+        /// <summary>
+        /// Delete entity entries by the passed predicate
+        /// </summary>
+        /// <param name="predicate">A function to test each element for a condition</param>
+        /// <returns>The task result contains the number of deleted records</returns>
         Task<DeleteResult> DeleteAsync(Expression<Func<TEntity, bool>> predicate);
 
+        /// <summary>
+        /// Delete entity entries by the passed predicate
+        /// </summary>
+        /// <param name="predicate">A function to test each element for a condition</param>
+        /// <returns>
+        /// A number of deleted records
+        /// </returns>
         DeleteResult Delete(Expression<Func<TEntity, bool>> predicate);
     }
 }
